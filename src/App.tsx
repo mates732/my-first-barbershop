@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage'
 import OffersPage from './pages/OffersPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
+import GalleryPage from './pages/GalleryPage'
 
 function AppShell() {
   const { requestIntro } = useApp()
@@ -145,7 +146,8 @@ function AppShell() {
          <Route path="/" element={<HomePage />} />
          <Route path="/nabidka" element={<OffersPage />} />
          <Route path="/o-nas" element={<AboutPage />} />
-         <Route path="/kontakt" element={<ContactPage />} />
+          <Route path="/kontakt" element={<ContactPage />} />
+          <Route path="/galerie" element={<GalleryPage />} />
          <Route path="*" element={<HomePage />} />
        </Routes>
      </main>

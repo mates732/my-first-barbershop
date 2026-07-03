@@ -112,4 +112,5 @@ export const navLinks = [
   { label: 'Galerie', href: '/#galerie' },
   { label: 'Služby', href: '/#sluzby' },
   { label: 'Kontakt', href: '/#kontakt' },
+  { label: 'Galerie', href: '/galerie' },
 ]

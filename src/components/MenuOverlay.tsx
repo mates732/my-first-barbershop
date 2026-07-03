@@ -30,13 +30,17 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
   const navigate = useNavigate()
 
   const handleNavClick = useCallback((href: string) => {
-    const sectionId = href.replace('/#', '')
     onClose()
     setTimeout(() => {
-      if (pathname !== '/' && sectionId) {
-        navigate('/')
+      if (href.startsWith('/#')) {
+        const sectionId = href.replace('/#', '')
+        if (pathname !== '/' && sectionId) {
+          navigate('/')
+        }
+        requestAnimationFrame(() => scrollToSection(sectionId))
+      } else {
+        navigate(href)
       }
-      requestAnimationFrame(() => scrollToSection(sectionId))
     }, 500)
   }, [onClose, navigate, pathname])
 
@@ -87,87 +91,89 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
    }}
    />
 
-   <div className="relative z-10 flex flex-col flex-1">
-   <div className="flex items-center justify-between px-4 sm:px-6 py-9">
-   <span className="text-navigation text-gold-100">
-   Barberman
-   </span>
-   <button
-   onClick={onClose}
-   className="group flex items-center gap-2 text-navigation text-gold-200/70 hover:text-gold-300 transition-colors duration-250"
-   aria-label="Zavřít menu"
-   >
-   Zavřít
-   <X className="h-4 w-4" />
-   </button>
-   </div>
+     <div className="relative z-10 flex flex-col flex-1 overflow-y-auto">
+     <div className="flex items-center justify-between px-4 sm:px-6 py-9">
+    <span className="text-navigation text-gold-100">
+    Barberman
+    </span>
+    <button
+    onClick={onClose}
+    className="group flex items-center gap-2 text-navigation text-gold-200/70 hover:text-gold-300 transition-colors duration-250"
+    aria-label="Zavřít menu"
+    >
+    Zavřít
+    <X className="h-4 w-4" />
+    </button>
+     </div>
 
-   <motion.nav
-   className="flex flex-1 flex-col items-center justify-center gap-6 sm:gap-8"
-   variants={{
-   hidden: {},
-   visible: {
-   transition: { staggerChildren: 0.05, delayChildren: 0.15 },
-   },
-   exit: {
-   transition: { staggerChildren: 0.03, staggerDirection: -1 },
-   },
-   }}
-   initial="hidden"
-   animate="visible"
-   exit="exit"
-   >
-   {navLinks.map((l) => (
-   <motion.div key={l.href} variants={itemVariants} className="group relative">
-   <span className="absolute -left-12 top-1/2 -translate-y-1/2 w-0 h-px bg-gold-500/70 group-hover:w-9 transition-all duration-300 pointer-events-none" />
-   <button
-   onClick={() => handleNavClick(l.href)}
-   className="relative block font-display text-4xl font-600 uppercase tracking-[0.12em] text-white/55 hover:text-gold-400 transition-colors duration-300 hover:translate-x-2 sm:text-6xl lg:text-7xl cursor-pointer"
-   >
-   {l.label}
-   </button>
-   </motion.div>
-   ))}
-   </motion.nav>
+      <div className="flex flex-col justify-center flex-1">
+      <motion.nav
+      className="flex flex-col items-center gap-6 sm:gap-8"
+     variants={{
+     hidden: {},
+     visible: {
+     transition: { staggerChildren: 0.05, delayChildren: 0.15 },
+     },
+     exit: {
+     transition: { staggerChildren: 0.03, staggerDirection: -1 },
+     },
+     }}
+     initial="hidden"
+     animate="visible"
+     exit="exit"
+     >
+     {navLinks.map((l) => (
+     <motion.div key={l.href} variants={itemVariants} className="group relative">
+     <span className="absolute -left-12 top-1/2 -translate-y-1/2 w-0 h-px bg-gold-500/70 group-hover:w-9 transition-all duration-300 pointer-events-none" />
+     <button
+     onClick={() => handleNavClick(l.href)}
+     className="relative block font-display text-4xl font-600 uppercase tracking-[0.12em] text-white/55 hover:text-gold-400 transition-colors duration-300 hover:translate-x-2 sm:text-6xl lg:text-7xl cursor-pointer"
+     >
+     {l.label}
+     </button>
+     </motion.div>
+     ))}
+     </motion.nav>
 
-   <motion.div
-   className="-mt-15 mb-6 flex justify-center"
-   initial={{ opacity: 0 }}
-   animate={{ opacity: 1, transition: { delay: 0.5, duration: 0.4, ease } }}
-   exit={{ opacity: 0, transition: { duration: 0.25, ease } }}
-   >
-   <button
-   onClick={handleBookingClick}
-   className="inline-flex items-center justify-center bg-gold-500 px-9 py-3.5 sm:px-10 sm:py-4 text-cta hover:bg-gold-400 transition-colors duration-250 cursor-pointer"
-   >
-   Rezervovat termín
-   </button>
-   </motion.div>
+     <motion.div
+      className="mt-6 sm:mt-8 mb-4 sm:mb-6 flex justify-center"
+     initial={{ opacity: 0 }}
+     animate={{ opacity: 1, transition: { delay: 0.5, duration: 0.4, ease } }}
+     exit={{ opacity: 0, transition: { duration: 0.25, ease } }}
+     >
+     <button
+     onClick={handleBookingClick}
+     className="inline-flex items-center justify-center bg-gold-500 px-9 py-3.5 sm:px-10 sm:py-4 text-cta hover:bg-gold-400 transition-colors duration-250 cursor-pointer"
+     >
+     Rezervovat termín
+     </button>
+     </motion.div>
+     </div>
 
-   <motion.div
-   className="px-4 sm:px-6 py-6"
-   initial={{ opacity: 0 }}
-   animate={{ opacity: 1, transition: { delay: 0.55, duration: 0.4, ease } }}
-   exit={{ opacity: 0, transition: { duration: 0.25, ease } }}
-   >
-   <div className="flex flex-col items-center gap-3 text-sm sm:flex-row sm:justify-between">
-   <a
-   href={`tel:${contact.phone.replace(/\s/g, '')}`}
-   className="text-supporting hover:text-gold-300 transition-colors duration-250"
-   >
-   {contact.phone}
-   </a>
-   <span className="text-supporting">
-   {contact.address}, {contact.city}
-   </span>
-   <span className="text-decorative uppercase tracking-[0.3em]">
-   Most · CZ
-   </span>
-   </div>
-   </motion.div>
-   </div>
-   </motion.div>
-   )}
-   </AnimatePresence>
+    <motion.div
+    className="px-4 sm:px-6 py-6"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1, transition: { delay: 0.55, duration: 0.4, ease } }}
+    exit={{ opacity: 0, transition: { duration: 0.25, ease } }}
+    >
+    <div className="flex flex-col items-center gap-3 text-sm sm:flex-row sm:justify-between">
+    <a
+    href={`tel:${contact.phone.replace(/\s/g, '')}`}
+    className="text-supporting hover:text-gold-300 transition-colors duration-250"
+    >
+    {contact.phone}
+    </a>
+    <span className="text-supporting">
+    {contact.address}, {contact.city}
+    </span>
+    <span className="text-decorative uppercase tracking-[0.3em]">
+    Most · CZ
+    </span>
+    </div>
+    </motion.div>
+    </div>
+    </motion.div>
+    )}
+    </AnimatePresence>
   )
 }
