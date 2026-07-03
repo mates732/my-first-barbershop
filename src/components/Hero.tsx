@@ -13,24 +13,22 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen snap-start overflow-hidden">
-      <h1
-        id="hero-heading"
-        className="absolute left-1/2 font-display uppercase leading-[0.9] text-center"
-        style={{ top: '50%', transform: 'translate(-50%, -50%)' }}
-      >
-        <span className="block text-white font-400 tracking-[0.12em] text-[2.531rem] sm:text-[3.375rem] md:text-[4.219rem] lg:text-[5.063rem] xl:text-[6.75rem]">
-          BARBERMAN
-        </span>
-        <span className="block text-gold-400 font-400 tracking-[0.12em] text-[2.531rem] sm:text-[3.375rem] md:text-[4.219rem] lg:text-[5.063rem] xl:text-[6.75rem]">
-          REVOLUTION
-        </span>
-      </h1>
-
       <div
-        className="mx-auto flex flex-col items-center px-4 sm:px-6 lg:px-8 w-full max-w-7xl"
-        style={{ paddingTop: 'calc(50vh + 100px)', paddingBottom: '6rem' }}
+        className="mx-auto flex flex-col items-center px-4 sm:px-6 lg:px-8 w-full max-w-7xl pt-[320px] pb-24 sm:pt-[400px] lg:pt-[480px]"
       >
-        <p className="mt-4 sm:mt-5 max-w-xl text-center text-quote px-4">
+        <h1
+          id="hero-heading"
+          className="font-display uppercase leading-[0.9] text-center"
+        >
+          <span className="block text-white font-400 tracking-[0.12em] text-[2.531rem] sm:text-[3.375rem] md:text-[4.219rem] lg:text-[5.063rem] xl:text-[6.75rem]">
+            BARBERMAN
+          </span>
+          <span className="block text-gold-400 font-400 tracking-[0.12em] text-[2.531rem] sm:text-[3.375rem] md:text-[4.219rem] lg:text-[5.063rem] xl:text-[6.75rem]">
+            REVOLUTION
+          </span>
+        </h1>
+
+        <p className="mt-6 sm:mt-8 max-w-xl text-center text-quote px-4">
           Střih, který odpovídá tvému stylu.
         </p>
 
