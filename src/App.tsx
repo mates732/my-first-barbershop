@@ -22,14 +22,19 @@ function AppShell() {
   const INITIAL_SCALE = 2.6
   const FINAL_SCALE = 1.85
   const FADE_GRADIENT = 40
-  const iconX = useMotionValue(0)
-  const iconY = useMotionValue(0)
+
+  const hatBaseSize = typeof window !== 'undefined' && window.matchMedia('(min-width: 640px)').matches ? 64 : 56
+  const initX = typeof window !== 'undefined' ? Math.round(window.innerWidth / 2 - hatBaseSize / 2) : 0
+  const initY = typeof window !== 'undefined' ? Math.round(Math.max(200, window.innerHeight * 0.18)) : 0
+
+  const iconX = useMotionValue(initX)
+  const iconY = useMotionValue(initY)
   const logoScale = useMotionValue(INITIAL_SCALE)
 
-  const startXRef = useRef(0)
-  const startYRef = useRef(0)
+  const startXRef = useRef(initX)
+  const startYRef = useRef(initY)
   const finalYRef = useRef(0)
-  const detachScrollRef = useRef(0)
+  const detachScrollRef = useRef(1)
   const fadeClearRef = useRef(100)
 
   useLayoutEffect(() => {
@@ -46,22 +51,24 @@ function AppShell() {
   }, [])
 
   function init() {
-    const hatBaseSize = window.matchMedia('(min-width: 640px)').matches ? 64 : 56
+    const hbs = window.matchMedia('(min-width: 640px)').matches ? 64 : 56
     const headerNav = document.getElementById('header-nav')
     const headerHeight = headerNav ? headerNav.getBoundingClientRect().height : 60
 
     const navCenter = headerHeight / 2
-    finalYRef.current = Math.round(navCenter - hatBaseSize / 2 + 19)
+    finalYRef.current = Math.round(navCenter - hbs / 2 + 19)
     fadeClearRef.current = Math.round(headerHeight - 5)
 
-    startXRef.current = Math.round(window.innerWidth / 2 - hatBaseSize / 2)
+    startXRef.current = Math.round(window.innerWidth / 2 - hbs / 2)
     iconX.set(startXRef.current)
 
     const heading = document.getElementById('hero-heading')
-    if (!heading) return
-    const headingTop = heading.getBoundingClientRect().top + window.scrollY
+    let headingTop = typeof window !== 'undefined' ? window.scrollY + Math.max(200, window.innerHeight * 0.18) : 0
+    if (heading) {
+      headingTop = heading.getBoundingClientRect().top + window.scrollY
+    }
 
-    startYRef.current = Math.round(headingTop - hatBaseSize / 2 - (hatBaseSize * INITIAL_SCALE) / 2 - 24)
+    startYRef.current = Math.round(headingTop - hbs / 2 - (hbs * INITIAL_SCALE) / 2 - 24)
     detachScrollRef.current = Math.max(startYRef.current - finalYRef.current, 1)
     updateLogoPosition(window.scrollY)
   }
