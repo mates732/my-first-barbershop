@@ -5,7 +5,7 @@ import SectionHeading from './SectionHeading'
 import { contact, openingHours } from '../lib/data'
 import { SECTION_PADDING_Y } from '../foundation/tokens/spacing'
 
-export default function Contact() {
+export default function Contact({ compact }: { compact?: boolean }) {
   const todayIdx = (new Date().getDay() + 6) % 7
   const isApple = /iPhone|iPad|iPod/.test(navigator.userAgent)
   const addressHref = isApple
@@ -26,7 +26,7 @@ export default function Contact() {
  </Reveal>
  </div>
 
- <div className="grid gap-5 lg:grid-cols-3">
+  <div className={`grid gap-5 ${compact ? 'lg:grid-cols-2' : 'lg:grid-cols-3'}`}>
  <Reveal className="h-full">
  <div className="flex h-full flex-col border border-gold-500/12 bg-ink-900/40 p-7 sm:p-8">
  <h3 className="text-heading-card text-gold-300">
@@ -123,22 +123,35 @@ export default function Contact() {
  })}
  </ul>
  </div>
- </Reveal>
+  </Reveal>
 
- <Reveal delay={0.2} className="h-full">
- <div className="h-full overflow-hidden border border-gold-500/12 bg-ink-900/40 p-2">
- <iframe
- title="Mapa – Barberman Revolution Most"
- src={`https://maps.google.com/maps?q=${encodeURIComponent(contact.mapQuery)}&output=embed`}
- className="h-full min-h-[300px] w-full"
-  style={{}}
- loading="lazy"
- referrerPolicy="no-referrer-when-downgrade"
- />
- </div>
- </Reveal>
- </div>
- </div>
- </SectionTransition>
- )
+  {!compact && (
+  <Reveal delay={0.2} className="h-full">
+  <div className="h-full overflow-hidden border border-gold-500/12 bg-ink-900/40 p-2">
+  <iframe
+  title="Mapa – Barberman Revolution Most"
+  src={`https://maps.google.com/maps?q=${encodeURIComponent(contact.mapQuery)}&output=embed`}
+   className="h-full min-h-[300px] w-full"
+   loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+  />
+  </div>
+  </Reveal>
+  )}
+  </div>
+
+  {compact && (
+  <div className="mt-10 text-center">
+  <a
+  href="/kontakt"
+  className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] text-gold-400 hover:text-gold-300 transition-colors"
+  >
+  Kontakt a cesta k nám
+  <span className="text-base leading-none">→</span>
+  </a>
+  </div>
+  )}
+  </div>
+  </SectionTransition>
+  )
 }

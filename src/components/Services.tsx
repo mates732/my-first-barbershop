@@ -33,13 +33,14 @@ function ServiceRow({ service }: { service: Service }) {
   )
 }
 
-export default function Services() {
+export default function Services({ compact }: { compact?: boolean }) {
   const [activeTab, setActiveTab] = useState<TabKey>('main')
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
   const [underlineStyle, setUnderlineStyle] = useState({ width: 0, left: 0 })
   const services = activeTab === 'main' ? mainServices : additionalServices
 
   useLayoutEffect(() => {
+    if (compact) return
     const idx = activeTab === 'main' ? 0 : 1
     const el = tabRefs.current[idx]
     if (el?.parentElement) {
@@ -52,7 +53,40 @@ export default function Services() {
         left: elRect.left - parentRect.left + offset,
       })
     }
-  }, [activeTab])
+  }, [activeTab, compact])
+
+  if (compact) {
+    return (
+      <section id="sluzby" className="relative py-[60px]">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <SectionHeading label="Menu" align="center" />
+            <h2 className="text-display">
+              Služby & <span className="text-display-accent">ceny</span>
+            </h2>
+          </div>
+        </div>
+
+        <div className="mx-auto mt-16 max-w-4xl px-5 sm:px-8">
+          <div className="overflow-hidden border border-gold-500/12">
+            {mainServices.slice(0, 3).map((s) => (
+              <ServiceRow key={s.id} service={s} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mx-auto mt-10 max-w-md text-center">
+          <a
+            href="/nabidka"
+            className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.15em] text-gold-400 hover:text-gold-300 transition-colors"
+          >
+            Zobrazit všechny služby
+            <span className="text-base leading-none">→</span>
+          </a>
+        </div>
+      </section>
+    )
+  }
 
   return (
   <section id="sluzby" className="relative py-[60px]">

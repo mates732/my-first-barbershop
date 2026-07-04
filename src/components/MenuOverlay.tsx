@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
 import { navLinks, contact, BOOKING_URL } from '../lib/data'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 
 interface MenuOverlayProps {
  open: boolean
@@ -50,6 +50,15 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
       window.open(BOOKING_URL, '_blank', 'noopener,noreferrer')
     }, 500)
   }, [onClose])
+
+  useEffect(() => {
+    if (!open) return
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleKey)
+    return () => document.removeEventListener('keydown', handleKey)
+  }, [open, onClose])
 
   return (
    <AnimatePresence>

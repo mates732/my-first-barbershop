@@ -55,8 +55,8 @@ export default function Booking() {
   className="flex w-full items-center justify-center gap-3 border border-gold-500/50 bg-gold-500 px-8 py-5 text-cta"
  >
  Otevřít rezervační systém
- <ArrowRight className="h-4 w-4 " />
- </a>
+  <ArrowRight className="h-4 w-4" />
+  </a>
  </div>
  </Reveal>
  </div>

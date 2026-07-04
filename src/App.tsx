@@ -37,7 +37,7 @@ function AppShell() {
       contentTopRef.current = contentRef.current.getBoundingClientRect().top + window.scrollY
     }
     init()
-  }, [])
+  }, [pathname])
 
   useEffect(() => {
     const handleResize = () => { init() }

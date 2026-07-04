@@ -37,8 +37,8 @@ export default function FinalScene() {
   className="mt-12 inline-flex items-center gap-3 border border-gold-500/50 bg-gold-500 px-12 py-5 text-cta"
  >
  Rezervovat termín
- <ArrowRight className="h-4 w-4 " />
- </a>
+  <ArrowRight className="h-4 w-4" />
+  </a>
  </Reveal>
  </div>
  </SectionTransition>

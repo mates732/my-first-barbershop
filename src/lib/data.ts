@@ -107,10 +107,9 @@ export const contact = {
 }
 
 export const navLinks = [
-  { label: 'Domů', href: '/#hero' },
-  { label: 'O nás', href: '/#o-nas' },
-  { label: 'Galerie', href: '/#galerie' },
-  { label: 'Služby', href: '/#sluzby' },
-  { label: 'Kontakt', href: '/#kontakt' },
+  { label: 'Domů', href: '/' },
+  { label: 'O nás', href: '/o-nas' },
   { label: 'Galerie', href: '/galerie' },
+  { label: 'Služby', href: '/nabidka' },
+  { label: 'Kontakt', href: '/kontakt' },
 ]
