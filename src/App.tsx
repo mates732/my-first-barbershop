@@ -19,7 +19,7 @@ function AppShell() {
   const contentRef = useRef<HTMLDivElement>(null)
   const contentTopRef = useRef(0)
   const { scrollY } = useScroll()
-  const INITIAL_SCALE = 2.6
+  const INITIAL_SCALE = 3.9
   const FINAL_SCALE = 1.85
   const FADE_GRADIENT = 40
 

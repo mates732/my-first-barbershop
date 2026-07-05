@@ -1,7 +1,7 @@
 # Architecture Validation Report
 
-**Date**: 2026-07-04 11:16:46
-**Compliance Score**: 75/100
+**Date**: 2026-07-05 07:30:40
+**Compliance Score**: 70/100
 **Status**: ⚠️ WARN
 
 ---
@@ -14,9 +14,9 @@
 | Checks passed | 34 |
 | Critical violations | 0 |
 | Errors | 0 |
-| Warnings | 5 |
+| Warnings | 6 |
 | Info | 0 |
-| Deductions | 25 pts |
+| Deductions | 30 pts |
 
 ---
 
@@ -26,7 +26,8 @@
 - **components/Header.tsx** — Hardcoded z-index classes: z-60
 - **components/MenuOverlay.tsx** — Hardcoded z-index classes: z-10
 - **components/MorphingArrowButton.tsx** — Hardcoded z-index classes: z-20
-- **components/MorphingArrowButton.tsx** — Duplicated easing [0.25, 0.1, 0.25, 1] appears in 4 locations
+- **components/ui/bento-gallery.tsx** — Hardcoded z-index classes: z-10
+- **components/MorphingArrowButton.tsx** — Duplicated easing [0.25, 0.1, 0.25, 1] appears in 5 locations
 
 ## Verification Details
 
@@ -37,13 +38,13 @@ Foundation → application imports: 0 violation(s) → **✅ PASS**
 Hardcoded values with Foundation equivalents: 0 → **✅ PASS**
 
 ### Z-index
-Unreferenced z-index classes: 4 file(s) → **⚠️ WARN**
+Unreferenced z-index classes: 5 file(s) → **⚠️ WARN**
 
 ### Motion Duplication
 Duplicated motion definitions: 1 → **⚠️ WARN**
 
 ### Governance Compliance
-Score: 75/100 — ⚠️ Needs attention
+Score: 70/100 — ⚠️ Needs attention
 
 ## Suggested Improvements
 
@@ -51,6 +52,7 @@ Score: 75/100 — ⚠️ Needs attention
 1. File components/Header.tsx uses raw z-index Tailwind classes. Import from tokens/z-index.ts instead.
 1. File components/MenuOverlay.tsx uses raw z-index Tailwind classes. Import from tokens/z-index.ts instead.
 1. File components/MorphingArrowButton.tsx uses raw z-index Tailwind classes. Import from tokens/z-index.ts instead.
+1. File components/ui/bento-gallery.tsx uses raw z-index Tailwind classes. Import from tokens/z-index.ts instead.
 1. Found in: components/MorphingArrowButton.tsx, components/Reveal.tsx, components/ui/bento-gallery.tsx. Consider extracting to tokens/timing.ts.
 
 ---
