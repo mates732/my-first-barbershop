@@ -14,7 +14,7 @@ export default function Hero() {
   return (
     <section id="hero" className="relative min-h-screen snap-start overflow-hidden">
       <div
-        className="mx-auto flex flex-col items-center px-4 sm:px-6 lg:px-8 w-full max-w-7xl pt-[320px] pb-24 sm:pt-[400px] lg:pt-[480px]"
+        className="mx-auto flex flex-col items-center px-4 sm:px-6 lg:px-8 w-full max-w-7xl pt-[calc(320px+8vh)] pb-24 sm:pt-[400px] lg:pt-[480px]"
       >
         <h1
           id="hero-heading"
