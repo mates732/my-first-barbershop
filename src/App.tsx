@@ -68,7 +68,7 @@ function AppShell() {
       headingTop = heading.getBoundingClientRect().top + window.scrollY
     }
 
-    startYRef.current = Math.round(headingTop - hbs / 2 - (hbs * INITIAL_SCALE) / 2 - 24)
+    startYRef.current = Math.round(headingTop - hbs / 2 - (hbs * INITIAL_SCALE) / 2 + (window.matchMedia('(min-width: 640px)').matches ? 46 : 56))
     detachScrollRef.current = Math.max(startYRef.current - finalYRef.current, 1)
     updateLogoPosition(window.scrollY)
   }
