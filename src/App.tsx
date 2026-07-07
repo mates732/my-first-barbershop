@@ -16,6 +16,7 @@ function AppShell() {
   const { requestIntro } = useApp()
   const { pathname } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [, forceRender] = useState(0)
   const contentRef = useRef<HTMLDivElement>(null)
   const contentTopRef = useRef(0)
   const { scrollY } = useScroll()
@@ -42,6 +43,10 @@ function AppShell() {
       contentTopRef.current = contentRef.current.getBoundingClientRect().top + window.scrollY
     }
     init()
+    // Force synchronous re-render so framer-motion picks up the freshly
+    // measured MotionValue values before the first paint.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    forceRender(n => n + 1)
   }, [pathname])
 
   useEffect(() => {
