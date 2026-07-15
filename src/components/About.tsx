@@ -1,6 +1,7 @@
 import Reveal from './Reveal'
 import SectionTransition from './SectionTransition'
 import SectionHeading from './SectionHeading'
+import { siteConfig } from '../config/site'
 
 export default function About({ compact }: { compact?: boolean }) {
   return (
@@ -18,8 +19,7 @@ export default function About({ compact }: { compact?: boolean }) {
           <Reveal delay={0.1}>
             <div className={`text-ink-100 font-[500] leading-[1.85] text-base sm:text-lg ${compact ? 'mt-10 space-y-6' : 'mt-14 space-y-10'}`}>
               <p>
-                Barberman Revolution je místo, kde se potkává poctivé řemeslo
-                s moderním přístupem.
+                {siteConfig.business.description}
               </p>
               {!compact && (
                 <>

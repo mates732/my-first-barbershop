@@ -1,5 +1,10 @@
 import { GALLERY } from './gallery'
-import type { CarouselImage } from '../components/CircularCarousel'
+
+export interface CarouselImage {
+  src: string
+  alt: string
+  instagram?: string
+}
 
 const modules = import.meta.glob('/src/assets/gallery/*.{jpg,jpeg,png,webp}', {
   eager: true,

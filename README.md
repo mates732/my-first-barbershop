@@ -1,73 +1,164 @@
-# React + TypeScript + Vite
+# Zlatý Hřeben — Premium Website Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Premium single-page website template for service businesses (barbershops, hair salons, beauty studios, tattoo studios).
 
-Currently, two official plugins are available:
+Built with React, TypeScript, Vite, Tailwind CSS v4, Framer Motion.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Using as a Client Template
 
-## React Compiler
+All business identity is centralized in one file:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/config/site.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Edit this file to configure the template for a new client.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Business Name
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```ts
+business.name: 'Zlatý Hřeben'             // full display name
+business.shortName: 'Zlatý Hřeben'        // short/header name
+business.nameParts: ['ZLATÝ', 'HŘEBEN']   // split hero heading (2 parts)
+```
+
+### 2. Phone & Email
+
+```ts
+contact.phone: '+420 773 719 399'
+contact.email: '...'                         // optional
+```
+
+### 3. Booking URL
+
+```ts
+booking.url: 'https://...'                   // booking system URL
+booking.label: 'Rezervovat termín'           // button text
+booking.system: 'MyFox'                      // booking system name
+```
+
+### 4. Social Links
+
+```ts
+social.instagram: 'https://www.instagram.com/...'
+social.facebook: 'https://facebook.com/...'  // optional
+social.tiktok: 'https://tiktok.com/...'      // optional
+```
+
+### 5. Logo & Branding
+
+Replace the logo file:
+```
+public/fotky/logo.png         → main logo (used in animated header logo)
+public/images/logo2.png       → favicon & apple-touch-icon
+```
+
+Update paths in `src/config/site.ts`:
+```ts
+branding.logo: '/fotky/logo.png'
+branding.favicon: '/images/logo2.png'
+```
+
+### 6. Hero Background Image
+
+Replace: `public/images/pozadi.jpg`
+
+Referenced in:
+- `src/App.tsx` (line ~112)
+- `src/components/MenuOverlay.tsx` (line ~77)
+- `index.html` (preload)
+
+### 7. Gallery Images
+
+Replace images in: `src/assets/gallery/`
+
+Update alt texts in: `src/lib/gallery.ts`
+
+The carousel auto-loads all `.jpg` files from `src/assets/gallery/` via `import.meta.glob`.
+
+### 8. Services & Pricing
+
+Edit in: `src/lib/data.ts`
+
+```ts
+export const mainServices: Service[] = [
+  { id: 'unique-id', name: 'Service Name', duration: '30 min', price: '490 Kč' },
+  // ...
+]
+
+export const additionalServices: Service[] = [
+  // ...
+]
+```
+
+### 9. SEO Metadata
+
+Configured in `src/config/site.ts` and injected into `index.html` via Vite plugin:
+
+```ts
+seo.title: 'Business Name'
+seo.description: 'Description for search engines...'
+seo.ogTitle: 'Open Graph Title'
+seo.ogDescription: 'Open Graph Description'
+seo.lang: 'cs'                               // HTML lang attribute
+```
+
+### 10. Opening Hours
+
+Edit in: `src/lib/data.ts`
+
+```ts
+export const openingHours = [
+  { day: 'Pondělí', hours: '9:00 – 18:00' },
+  // ...
+]
+```
+
+## Running Locally
+
+```bash
+npm install
+npm run dev
+```
+
+## Building
+
+```bash
+npm run build
+```
+
+## Available Routes
+
+| Path | Page |
+|------|------|
+| `/` | Homepage |
+| `/nabidka` | Services & pricing |
+| `/o-nas` | About us |
+| `/galerie` | Photo gallery |
+| `/kontakt` | Contact & map |
+
+## Tech Stack
+
+- React 19 + TypeScript
+- Vite 7
+- Tailwind CSS v4
+- Framer Motion
+- React Router v7
+- Lucide React icons
+
+## Project Structure
+
+```
+src/
+├── config/site.ts          ← Business identity (edit this first)
+├── lib/data.ts             ← Services, reviews, hours, nav links
+├── lib/gallery.ts          ← Gallery metadata & alt texts
+├── components/             ← Reusable UI components
+├── pages/                  ← Route page components
+├── foundation/             ← Design tokens & providers
+└── assets/gallery/         ← Gallery images
+public/
+├── fotky/logo.png          ← Main logo
+├── images/logo2.png        ← Favicon
+└── images/pozadi.jpg       ← Background texture
 ```

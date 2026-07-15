@@ -2,11 +2,7 @@ import PageHeader from '../components/PageHeader'
 import BentoGallery from '../components/ui/bento-gallery'
 import carouselImages from '../lib/carousel-data'
 
-const order = [0, 2, 3, 4, 5, 6, 10, 7, 8, 9, 1, 11, 12]
-
-const gridImages = order.map((i) => carouselImages[i])
-
-const imageItems = gridImages.map((img, i) => ({
+const imageItems = carouselImages.map((img, i) => ({
   id: i + 1,
   src: img.src,
   alt: img.alt,

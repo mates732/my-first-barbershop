@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
 import { navLinks, contact, BOOKING_URL } from '../lib/data'
+import { siteConfig } from '../config/site'
 import { useCallback, useEffect } from 'react'
 
 interface MenuOverlayProps {
@@ -74,7 +75,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
    <div
    className="absolute inset-0"
    style={{
-   backgroundImage: "url('/images/pozadi.jpg')",
+    backgroundImage: "linear-gradient(135deg, #08080a 0%, #0d0d10 40%, #131318 70%, #0d0d10 100%)",
    backgroundSize: 'cover',
    backgroundPosition: 'center 25%',
    backgroundRepeat: 'no-repeat',
@@ -103,7 +104,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
      <div className="relative z-10 flex flex-col flex-1 overflow-y-auto">
      <div className="flex items-center justify-between px-4 sm:px-6 py-9">
     <span className="text-navigation text-gold-100">
-    Barberman
+    {siteConfig.business.shortName}
     </span>
     <button
     onClick={onClose}
@@ -167,7 +168,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
     >
     <div className="flex flex-col items-center gap-3 text-sm sm:flex-row sm:justify-between">
     <a
-    href={`tel:${contact.phone.replace(/\s/g, '')}`}
+    href="javascript:void(0)"
     className="text-supporting hover:text-gold-300 transition-colors duration-250"
     >
     {contact.phone}
@@ -176,7 +177,7 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
     {contact.address}, {contact.city}
     </span>
     <span className="text-decorative uppercase tracking-[0.3em]">
-    Most · CZ
+    {siteConfig.business.city} · {siteConfig.business.cityShort}
     </span>
     </div>
     </motion.div>

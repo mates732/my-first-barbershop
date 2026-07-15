@@ -13,7 +13,7 @@ const stats = [
 
 const quotes = [
  {
- text: 'Nejlepší barbershop v Mostě. Luxusní prostředí, profesionální přístup a střih, který přesně sedí.',
+    text: 'Nejlepší barbershop v Brně. Luxusní prostředí, profesionální přístup a střih, který přesně sedí.',
  name: 'Tomáš N.',
  },
  {

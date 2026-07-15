@@ -3,14 +3,14 @@ import Reveal from './Reveal'
 import SectionTransition from './SectionTransition'
 import SectionHeading from './SectionHeading'
 import { contact, openingHours } from '../lib/data'
+import { siteConfig } from '../config/site'
 import { SECTION_PADDING_Y } from '../foundation/tokens/spacing'
 
 export default function Contact({ compact }: { compact?: boolean }) {
   const todayIdx = (new Date().getDay() + 6) % 7
-  const isApple = /iPhone|iPad|iPod/.test(navigator.userAgent)
-  const addressHref = isApple
-    ? 'https://maps.apple.com/?ll=50.511176,13.6474141&q=Barberman%20Revolution'
-    : 'https://www.google.com/maps/place/Barberman+Revolution/@50.5111803,13.6475693,20.41z/data=!4m6!3m5!1s0x470a21189498e821:0x1a96e58c5b7ecd8a!8m2!3d50.511176!4d13.6474141!16s%2Fg%2F11rqxtj2tf'
+  const { lat, lng } = siteConfig.contact.mapCoordinates
+  const encodedName = encodeURIComponent(siteConfig.business.name)
+  const addressHref = `https://www.google.com/maps/search/${encodedName}/@${lat},${lng},16z`
 
   return (
  <SectionTransition id="kontakt" className={`relative ${SECTION_PADDING_Y}`} snap>
@@ -21,7 +21,7 @@ export default function Contact({ compact }: { compact?: boolean }) {
   </Reveal>
  <Reveal delay={0.1}>
  <h2 className="text-display">
- Najdi nás <span className="text-display-accent">v Mostě</span>
+ Najdi nás <span className="text-display-accent">v {siteConfig.business.city}ě</span>
  </h2>
  </Reveal>
  </div>
@@ -59,7 +59,7 @@ export default function Contact({ compact }: { compact?: boolean }) {
  <ul className="mt-4 space-y-3 text-body">
  <li>
   <a
-  href={`tel:${contact.phone.replace(/\s/g, '')}`}
+  href="javascript:void(0)"
   className="flex items-center gap-3 text-body hover:text-gold-300"
   aria-label={`Zavolat na ${contact.phone}`}
   >
@@ -69,7 +69,7 @@ export default function Contact({ compact }: { compact?: boolean }) {
   </li>
   <li>
   <a
-          href={`https://www.instagram.com/${contact.instagram.replace('@', '')}/`}
+          href="javascript:void(0)"
   target="_blank"
   rel="noopener noreferrer"
   className="flex items-center gap-3 text-body hover:text-gold-300"
@@ -128,9 +128,9 @@ export default function Contact({ compact }: { compact?: boolean }) {
   {!compact && (
   <Reveal delay={0.2} className="h-full">
   <div className="h-full overflow-hidden border border-gold-500/12 bg-ink-900/40 p-2">
-  <iframe
-  title="Mapa – Barberman Revolution Most"
-  src={`https://maps.google.com/maps?q=${encodeURIComponent(contact.mapQuery)}&output=embed`}
+   <iframe
+   title={`Mapa – ${siteConfig.business.name} ${siteConfig.business.city}`}
+   src={`https://maps.google.com/maps?q=${encodeURIComponent(siteConfig.contact.mapQuery)}&output=embed`}
    className="h-full min-h-[300px] w-full"
    loading="lazy"
   referrerPolicy="no-referrer-when-downgrade"

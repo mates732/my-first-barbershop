@@ -3,6 +3,7 @@ import PageHeader from '../components/PageHeader'
 import Booking from '../components/Booking'
 import Reveal from '../components/Reveal'
 import { reviews } from '../lib/data'
+import { siteConfig } from '../config/site'
 
 const pillars = [
  {
@@ -28,7 +29,7 @@ export default function AboutPage() {
  <PageHeader
  eyebrow="O nás"
  title="Příběh & řemeslo"
- subtitle="Místo, kde se spojuje řemeslo s luxusním přístupem. Poznej, co za holičstvím Barberman Revolution stojí."
+  subtitle={`Místo, kde se spojuje řemeslo s luxusním přístupem. Poznej, co za ${siteConfig.business.name} stojí.`}
  />
 
  {/* Story */}
@@ -49,11 +50,11 @@ export default function AboutPage() {
  </Reveal>
  <Reveal delay={0.2}>
  <div className="mt-6 space-y-4 text-body">
- <p>
- Barberman Revolution vzniklo z jednoduché myšlenky – muž si zaslouží prostor,
- kde se cítí jako gentleman a odchází s přesně tím střihem, který chtěl. V Mostě
- jsme vybudovali místo, kde se potkává řemeslná preciznost s luxusním designem.
- </p>
+  <p>
+  {siteConfig.business.name} vzniklo z jednoduché myšlenky – muž si zaslouží prostor,
+  kde se cítí jako gentleman a odchází s přesně tím střihem, který chtěl. V {siteConfig.business.city}
+  jsme vybudovali místo, kde se potkává řemeslná preciznost s luxusním designem.
+  </p>
  <p>
  Žádný dav, žádný spěch. Jen ty, zrcadlo a barber, který ví, co dělá. Každý
  střih začíná konzultací a končí stylem, který sedí tvému životu.

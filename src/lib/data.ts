@@ -1,3 +1,5 @@
+import { siteConfig } from '../config/site'
+
 export interface Service {
   id: string
   name: string
@@ -35,54 +37,54 @@ export const additionalServices: Service[] = [
 export const services: Service[] = [...mainServices, ...additionalServices]
 
 export const reviews: Review[] = [
- {
- name: 'Tomáš Novák',
- initials: 'TN',
- rating: 5,
- text: 'Nejlepší barbershop v Mostě. Luxusní prostředí, profesionální přístup a střih, který přesně sedí. Cítím se tu jako VIP klient.',
- date: 'před 2 týdny',
- service: 'Střih + vousy',
- },
- {
- name: 'Pavel Dvořák',
- initials: 'PD',
- rating: 5,
- text: 'Chodím sem pravidelně přes rok. Vždycky odcházím s pocitem, že jsem dostal víc než jsem čekal. Atmosféra je bezkonkurenční.',
- date: 'před 1 měsícem',
- service: 'Premium zážitek',
- },
- {
- name: 'Martin Horák',
- initials: 'MH',
- rating: 5,
- text: 'Tradiční holení břitvou je zážitek, který musí zažít každý muž. Horký ručník, klid, preciznost. Čas se tu zastaví.',
- date: 'před 3 týdny',
- service: 'Tradiční holení',
- },
- {
- name: 'Jakub Veselý',
- initials: 'JV',
- rating: 5,
- text: 'Konečně holič, který naslouchá. Střih sedí na první dobrou. Interiér, hudba, vůně – všechno ladí v dokonalé harmonii.',
- date: 'před 1 měsícem',
- service: 'Pánský střih',
- },
- {
- name: 'Ondřej Marek',
- initials: 'OM',
- rating: 5,
- text: 'Doporučuji všem kámošům. Místo, kam se prostě chceš vracet. Zlatý standard v Mostě, žádný jiný barbershop se mu nevyrovná.',
- date: 'před 2 měsíci',
- service: 'Střih + vousy',
- },
- {
- name: 'Filip Černý',
- initials: 'FČ',
- rating: 5,
- text: 'Premium zážitek byl dar pro mě sama. Od masáže hlavy po finální styling – každá minuta stojí za to. Absolutní top.',
- date: 'před 5 týdny',
- service: 'Premium zážitek',
- },
+  {
+    name: 'Tomáš Novák',
+    initials: 'TN',
+    rating: 5,
+    text: 'Nejlepší barbershop v Brně. Luxusní prostředí, profesionální přístup a střih, který přesně sedí. Cítím se tu jako VIP klient.',
+    date: 'před 2 týdny',
+    service: 'Střih + vousy',
+  },
+  {
+    name: 'Pavel Dvořák',
+    initials: 'PD',
+    rating: 5,
+    text: 'Chodím sem pravidelně přes rok. Vždycky odcházím s pocitem, že jsem dostal víc než jsem čekal. Atmosféra je bezkonkurenční.',
+    date: 'před 1 měsícem',
+    service: 'Premium zážitek',
+  },
+  {
+    name: 'Martin Horák',
+    initials: 'MH',
+    rating: 5,
+    text: 'Tradiční holení břitvou je zážitek, který musí zažít každý muž. Horký ručník, klid, preciznost. Čas se tu zastaví.',
+    date: 'před 3 týdny',
+    service: 'Tradiční holení',
+  },
+  {
+    name: 'Jakub Veselý',
+    initials: 'JV',
+    rating: 5,
+    text: 'Konečně holič, který naslouchá. Střih sedí na první dobrou. Interiér, hudba, vůně – všechno ladí v dokonalé harmonii.',
+    date: 'před 1 měsícem',
+    service: 'Pánský střih',
+  },
+  {
+    name: 'Ondřej Marek',
+    initials: 'OM',
+    rating: 5,
+    text: 'Doporučuji všem kámošům. Místo, kam se prostě chceš vracet. Zlatý standard, žádný jiný barbershop se mu nevyrovná.',
+    date: 'před 2 měsíci',
+    service: 'Střih + vousy',
+  },
+  {
+    name: 'Filip Černý',
+    initials: 'FČ',
+    rating: 5,
+    text: 'Premium zážitek byl dar pro mě sama. Od masáže hlavy po finální styling – každá minuta stojí za to. Absolutní top.',
+    date: 'před 5 týdny',
+    service: 'Premium zážitek',
+  },
 ]
 
 export const openingHours = [
@@ -95,15 +97,14 @@ export const openingHours = [
   { day: 'Neděle', hours: 'Zavřeno' },
 ]
 
-export const BOOKING_URL =
- 'https://barberman.snippet.myfox.cz/form/show/date_2023-05-12/shopId_clafq42pjxhas07837jorotvq/lng_cs'
+export const BOOKING_URL = siteConfig.booking.url
 
 export const contact = {
-  address: 'Svatopluka Čecha 275/1',
-  city: '434 01 Most 1',
-  phone: '+420 773 719 399',
-  instagram: '@barbermanrevolution',
-  mapQuery: 'Svatopluka Čecha 275/1, Most, Czech Republic',
+  address: siteConfig.business.address,
+  city: siteConfig.business.postalCode,
+  phone: siteConfig.contact.phone,
+  instagram: siteConfig.contact.instagram,
+  mapQuery: siteConfig.contact.mapQuery,
 }
 
 export const navLinks = [

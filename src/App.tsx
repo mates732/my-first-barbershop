@@ -6,6 +6,7 @@ import Header from './components/Header'
 import AnimatedLogo from './components/AnimatedLogo'
 import ScrollToTop from './components/ScrollToTop'
 import Footer from './components/Footer'
+import CustomCursor from './components/motion/CustomCursor'
 import HomePage from './pages/HomePage'
 import OffersPage from './pages/OffersPage'
 import AboutPage from './pages/AboutPage'
@@ -106,10 +107,11 @@ function AppShell() {
   return (
   <>
   <ScrollToTop />
+  <CustomCursor />
     <div
       className="fixed inset-0 z-0 pointer-events-none"
       style={{
-        backgroundImage: "url('/images/pozadi.jpg')",
+        backgroundImage: "linear-gradient(135deg, #08080a 0%, #0d0d10 40%, #131318 70%, #0d0d10 100%)",
         backgroundSize: 'cover',
         backgroundPosition: 'center 25%',
         backgroundRepeat: 'no-repeat',
@@ -125,8 +127,9 @@ function AppShell() {
           x: iconX,
           y: iconY,
           scale: logoScale,
-          filter: 'drop-shadow(0 2px 8px rgba(0,0,0,.35))',
+          filter: 'drop-shadow(0 2px 10px rgba(0,0,0,.5))',
           transformOrigin: 'center center',
+          willChange: 'transform',
         }}
         onClick={handleLogoClick}
       />
@@ -141,8 +144,9 @@ function AppShell() {
           x: startXRef.current,
           y: finalYRef.current,
           scale: FINAL_SCALE,
-          filter: 'drop-shadow(0 2px 8px rgba(0,0,0,.35))',
+          filter: 'drop-shadow(0 2px 10px rgba(0,0,0,.5))',
           transformOrigin: 'center center',
+          willChange: 'transform',
         }}
         onClick={handleLogoClick}
       />
