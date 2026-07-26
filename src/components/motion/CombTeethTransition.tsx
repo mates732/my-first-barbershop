@@ -27,15 +27,15 @@ export default function CombTeethTransition({
 
   return (
     <div
-      className={`relative flex items-center justify-center gap-[3px] overflow-hidden py-12 ${className}`}
+      className={`relative flex items-center justify-center gap-[2px] overflow-hidden py-2 ${className}`}
       aria-hidden="true"
     >
       {Array.from({ length: count }).map((_, i) => (
         <motion.div
           key={i}
-          className="w-px bg-gold-500/30 origin-bottom"
+          className="w-[1.5px] bg-gold-500/30 origin-bottom"
           style={{
-            height: `${28 + Math.sin(i * 0.5) * 12}px`,
+            height: `${12 + Math.sin(i * 0.5) * 6}px`,
           }}
           custom={i}
           variants={toothVariants}

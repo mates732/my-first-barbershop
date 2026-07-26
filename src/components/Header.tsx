@@ -40,19 +40,19 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
  <>
    {pathname === '/' ? (
     <nav id="header-nav" className="fixed inset-x-0 top-0 z-60">
-    <div className="relative flex items-center justify-between px-4 sm:px-6 py-9">
+    <div className="relative flex items-center justify-between px-4 sm:px-6 py-0">
     <a
-    href={BOOKING_URL}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-navigation hover:text-gold-400 transition-colors"
+     href={BOOKING_URL}
+     target="_blank"
+     rel="noopener noreferrer"
+    className="text-navigation hover:text-gold-400 transition-colors py-0 leading-none border-b border-gold-500/60"
     >
-    Rezervovat
+     Rezervovat
     </a>
     <div id="header-center-slot" className="absolute left-1/2 top-1/2" />
    <button
    onClick={() => setMenuOpen(true)}
-   className="text-navigation"
+  className="text-navigation py-0 leading-none border-b border-gold-500/60"
    >
    Menu
    </button>
@@ -60,14 +60,14 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
    </nav>
    ) : (
    <nav id="header-nav" className="fixed inset-x-0 top-0 z-60">
-   <div className="flex items-center justify-between px-4 sm:px-6 py-9">
+   <div className="flex items-center justify-between px-4 sm:px-6 py-0">
     <button onClick={handleLogoClick} className="text-navigation [text-shadow:0_2px_6px_rgba(0,0,0,0.65)]">
     <span>{siteConfig.business.nameParts[0]}</span>
     <span className="ml-2 text-gold-100">{siteConfig.business.nameParts[1]}</span>
    </button>
    <button
    onClick={() => setMenuOpen(true)}
-   className="text-navigation"
+  className="text-navigation py-0 leading-none border-b border-gold-500/60"
    >
    Menu
    </button>

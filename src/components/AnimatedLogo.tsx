@@ -14,7 +14,7 @@ export default function AnimatedLogo({ style, onClick }: AnimatedLogoProps) {
       onClick={onClick}
       aria-label="Domů"
     >
-      <Logo className="h-14 w-14 sm:h-16 sm:w-16 flex-none" />
+      <Logo className="w-16 sm:w-20 h-auto flex-none" />
     </motion.button>
   )
 }

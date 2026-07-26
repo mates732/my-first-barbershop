@@ -1,9 +1,7 @@
-import { useRef, useLayoutEffect, useEffect, useCallback, useState } from 'react'
-import { motion, useMotionValue, useMotionValueEvent, useScroll, useTransform } from 'framer-motion'
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import { AppProvider, useApp } from './foundation/providers/AppProvider'
+import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { AppProvider } from './foundation/providers/AppProvider'
 import Header from './components/Header'
-import AnimatedLogo from './components/AnimatedLogo'
 import ScrollToTop from './components/ScrollToTop'
 import Footer from './components/Footer'
 import CustomCursor from './components/motion/CustomCursor'
@@ -14,95 +12,7 @@ import ContactPage from './pages/ContactPage'
 import GalleryPage from './pages/GalleryPage'
 
 function AppShell() {
-  const { requestIntro } = useApp()
-  const { pathname } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [, forceRender] = useState(0)
-  const contentRef = useRef<HTMLDivElement>(null)
-  const contentTopRef = useRef(0)
-  const { scrollY } = useScroll()
-  const INITIAL_SCALE = 5.0
-  const FINAL_SCALE = 1.85
-  const FADE_GRADIENT = 40
-
-  const hatBaseSize = typeof window !== 'undefined' && window.matchMedia('(min-width: 640px)').matches ? 64 : 56
-  const initX = typeof window !== 'undefined' ? Math.round(window.innerWidth / 2 - hatBaseSize / 2) : 0
-  const initY = typeof window !== 'undefined' ? Math.round(Math.max(200, window.innerHeight * 0.18)) : 0
-
-  const iconX = useMotionValue(initX)
-  const iconY = useMotionValue(initY)
-  const logoScale = useMotionValue(INITIAL_SCALE)
-
-  const startXRef = useRef(initX)
-  const startYRef = useRef(initY)
-  const finalYRef = useRef(0)
-  const detachScrollRef = useRef(1)
-  const fadeClearRef = useRef(100)
-
-  useLayoutEffect(() => {
-    if (contentRef.current) {
-      contentTopRef.current = contentRef.current.getBoundingClientRect().top + window.scrollY
-    }
-    init()
-    // Force synchronous re-render so framer-motion picks up the freshly
-    // measured MotionValue values before the first paint.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    forceRender(n => n + 1)
-  }, [pathname])
-
-  useEffect(() => {
-    const handleResize = () => { init() }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  function init() {
-    const hbs = window.matchMedia('(min-width: 640px)').matches ? 64 : 56
-    const headerNav = document.getElementById('header-nav')
-    const headerHeight = headerNav ? headerNav.getBoundingClientRect().height : 60
-
-    const navCenter = headerHeight / 2
-    finalYRef.current = Math.round(navCenter - hbs / 2 + 19)
-    fadeClearRef.current = Math.round(headerHeight - 5)
-
-    startXRef.current = Math.round(window.innerWidth / 2 - hbs / 2)
-    iconX.set(startXRef.current)
-
-    const heading = document.getElementById('hero-heading')
-    let headingTop = typeof window !== 'undefined' ? window.scrollY + Math.max(200, window.innerHeight * 0.18) : 0
-    if (heading) {
-      headingTop = heading.getBoundingClientRect().top + window.scrollY
-    }
-
-    startYRef.current = Math.round(headingTop - hbs / 2 - (hbs * INITIAL_SCALE) / 2 + (window.matchMedia('(min-width: 640px)').matches ? 46 : 56))
-    detachScrollRef.current = Math.max(startYRef.current - finalYRef.current, 1)
-    updateLogoPosition(window.scrollY)
-  }
-
-  function updateLogoPosition(y: number) {
-    const detachScroll = detachScrollRef.current
-    const raw = Math.max(0, Math.min(y / detachScroll, 1))
-    const t = 1 - Math.pow(1 - raw, 3)
-
-    iconX.set(startXRef.current)
-    iconY.set(startYRef.current - detachScroll * t)
-
-    logoScale.set(INITIAL_SCALE + (FINAL_SCALE - INITIAL_SCALE) * t)
-  }
-
-  useMotionValueEvent(scrollY, 'change', updateLogoPosition)
-
-  const maskStyle = useTransform(scrollY, (y) => {
-    const top = contentTopRef.current
-    const viewportTop = y - top
-    const clear = fadeClearRef.current
-    return `linear-gradient(to bottom, transparent ${viewportTop + clear}px, black ${viewportTop + clear + FADE_GRADIENT}px)`
-  })
-
-  const handleLogoClick = useCallback(() => {
-    requestIntro()
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [requestIntro])
 
   return (
   <>
@@ -117,46 +27,9 @@ function AppShell() {
         backgroundRepeat: 'no-repeat',
       }}
     />
-    {pathname === '/' && !menuOpen && (
-      <AnimatedLogo
-        style={{
-          position: 'fixed' as const,
-          left: 0,
-          top: 0,
-          zIndex: 80,
-          x: iconX,
-          y: iconY,
-          scale: logoScale,
-          filter: 'drop-shadow(0 2px 10px rgba(0,0,0,.5))',
-          transformOrigin: 'center center',
-          willChange: 'transform',
-        }}
-        onClick={handleLogoClick}
-      />
-    )}
-    {pathname === '/' && menuOpen && (
-      <AnimatedLogo
-        style={{
-          position: 'fixed' as const,
-          left: 0,
-          top: 0,
-          zIndex: 80,
-          x: startXRef.current,
-          y: finalYRef.current,
-          scale: FINAL_SCALE,
-          filter: 'drop-shadow(0 2px 10px rgba(0,0,0,.5))',
-          transformOrigin: 'center center',
-          willChange: 'transform',
-        }}
-        onClick={handleLogoClick}
-      />
-    )}
       <div className="relative z-10 min-h-screen text-ink-100">
         <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-       <motion.div
-       ref={contentRef}
-       style={{ maskImage: maskStyle, WebkitMaskImage: maskStyle }}
-      >
+      <div>
       <main>
        <Routes>
          <Route path="/" element={<HomePage />} />
@@ -168,7 +41,7 @@ function AppShell() {
        </Routes>
      </main>
      <Footer />
-     </motion.div>
+    </div>
    </div>
   </>
   )
