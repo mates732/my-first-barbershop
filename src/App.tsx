@@ -10,6 +10,7 @@ import OffersPage from './pages/OffersPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import GalleryPage from './pages/GalleryPage'
+import BookingRedirectPage from './pages/BookingRedirectPage'
 
 function AppShell() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -37,6 +38,7 @@ function AppShell() {
          <Route path="/o-nas" element={<AboutPage />} />
           <Route path="/kontakt" element={<ContactPage />} />
           <Route path="/galerie" element={<GalleryPage />} />
+          <Route path="/rezervace" element={<BookingRedirectPage />} />
          <Route path="*" element={<HomePage />} />
        </Routes>
      </main>
