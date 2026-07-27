@@ -41,10 +41,10 @@ export default function Header({ menuOpen, setMenuOpen }: HeaderProps) {
     <nav id="header-nav" className="fixed inset-x-0 top-0 z-60">
     <div className="relative flex items-center justify-between px-4 pt-4 sm:px-6 sm:pt-5">
     <Link
-     to="/rezervace"
-    className="text-navigation hover:text-gold-400 transition-colors py-0 leading-none border-b border-gold-500/60"
+      to="/kontakt"
+     className="text-navigation hover:text-gold-400 transition-colors py-0 leading-none border-b border-gold-500/60"
     >
-     Rezervovat
+      Rezervovat
     </Link>
     <div id="header-center-slot" className="absolute left-1/2 top-1/2" />
    <button

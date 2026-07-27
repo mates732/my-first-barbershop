@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
-import { navLinks, contact, BOOKING_URL } from '../lib/data'
+import { navLinks, contact } from '../lib/data'
 import { siteConfig } from '../config/site'
 import { useCallback, useEffect } from 'react'
 
@@ -48,9 +48,9 @@ export default function MenuOverlay({ open, onClose }: MenuOverlayProps) {
   const handleBookingClick = useCallback(() => {
     onClose()
     setTimeout(() => {
-      window.open(BOOKING_URL, '_blank', 'noopener,noreferrer')
+      navigate('/kontakt')
     }, 500)
-  }, [onClose])
+  }, [onClose, navigate])
 
   useEffect(() => {
     if (!open) return

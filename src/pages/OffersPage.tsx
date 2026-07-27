@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Clock, ArrowRight, Scissors } from 'lucide-react'
 import PageHeader from '../components/PageHeader'
 import Booking from '../components/Booking'
-import { mainServices, additionalServices, BOOKING_URL } from '../lib/data'
+import { mainServices, additionalServices } from '../lib/data'
 
 type Tab = 'main' | 'additional'
 
@@ -14,11 +14,9 @@ const tabs: { key: Tab; label: string }[] = [
 
 function ServiceRow({ name, duration, price, index }: { name: string; duration: string; price: string; index: number }) {
   return (
-  <a
-  href={BOOKING_URL}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="group flex items-center justify-between gap-4 border-b border-gold-500/8 px-6 py-6 sm:px-8 hover:bg-ink-800/10 transition-colors duration-200 cursor-pointer"
+  <Link
+  to="/kontakt"
+  className="group flex items-center justify-between gap-4 border-b border-gold-500/8 px-6 py-6 sm:px-8 hover:bg-ink-800/10 transition-colors duration-200"
   >
   <div className="flex items-center gap-4 sm:gap-6">
   <span className="font-serif text-2xl italic text-gold-500/50 sm:text-3xl group-hover:text-gold-400 transition-colors duration-200">
@@ -35,7 +33,7 @@ function ServiceRow({ name, duration, price, index }: { name: string; duration: 
   {duration}
   </span>
   </div>
-  </a>
+  </Link>
   )
 }
 

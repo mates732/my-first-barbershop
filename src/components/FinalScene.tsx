@@ -1,14 +1,15 @@
 import { ArrowRight } from 'lucide-react'
-import { BOOKING_URL } from '../lib/data'
-import { siteConfig } from '../config/site'
+import { useNavigate } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useCallback } from 'react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import CombTeethTransition from './motion/CombTeethTransition'
 
 export default function FinalScene() {
   const reduced = useReducedMotion()
   const sectionRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
+  const handleBooking = useCallback(() => navigate('/kontakt'), [navigate])
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'center center'],
@@ -29,7 +30,7 @@ export default function FinalScene() {
       <div className="relative z-10 mx-auto max-w-4xl px-5 text-center sm:px-8">
         <motion.div style={{ y: reduced ? undefined : y1, opacity: reduced ? undefined : opacity }}>
           <h2 className="font-display text-5xl sm:text-7xl lg:text-[7rem] font-700 uppercase leading-[0.88] tracking-[0.02em] text-white">
-            {siteConfig.business.nameParts[0] ? 'TVŮJ DALŠÍ' : 'TVŮJ DALŠÍ'}
+            TVŮJ DALŠÍ
           </h2>
         </motion.div>
 
@@ -57,12 +58,10 @@ export default function FinalScene() {
           Rezervuj si svůj termín online.
         </motion.p>
 
-        <motion.a
-          href={BOOKING_URL}
+        <motion.button
+          onClick={handleBooking}
           data-cursor="cta"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group relative mt-12 inline-flex items-center gap-3 border border-gold-500/50 bg-gold-500 px-12 py-5 text-cta overflow-hidden"
+          className="group relative mt-12 inline-flex items-center gap-3 border border-gold-500/50 bg-gold-500 px-12 py-5 text-cta overflow-hidden cursor-pointer"
           initial={reduced ? {} : { opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -71,7 +70,7 @@ export default function FinalScene() {
           <span className="relative z-10">Rezervovat termín</span>
           <ArrowRight className="relative z-10 h-4 w-4" />
           <span className="absolute inset-0 bg-gold-400 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-        </motion.a>
+        </motion.button>
       </div>
 
       <CombTeethTransition count={32} className="absolute bottom-0 left-0 right-0" />

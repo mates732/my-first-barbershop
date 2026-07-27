@@ -1,7 +1,7 @@
 import { useCallback, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { BOOKING_URL } from '../lib/data'
 import { siteConfig } from '../config/site'
 
 function CombSilhouette({ className = '' }: { className?: string }) {
@@ -115,20 +115,18 @@ export default function Hero() {
           <div
             className="relative z-10 mt-8 sm:mt-10 flex flex-col items-center gap-2"
           >
-            <a
-              href={BOOKING_URL}
+            <Link
+              to="/kontakt"
               data-cursor="cta"
-              target="_blank"
-              rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 font-display text-sm sm:text-base font-600 uppercase tracking-[0.18em] text-gold-400 hover:text-gold-300 transition-colors duration-300"
             >
-              {siteConfig.booking.label}
+              Rezervovat termín
               <span className="relative inline-flex overflow-hidden">
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
               <span className="absolute -bottom-1 left-0 h-px w-full bg-gold-500/40 scale-x-100 group-hover:scale-x-100 transition-transform duration-500" />
               <span className="absolute -bottom-1 left-0 h-px w-full bg-gold-400 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out" />
-            </a>
+            </Link>
 
             <button
               onClick={handleServicesClick}

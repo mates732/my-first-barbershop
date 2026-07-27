@@ -1,8 +1,8 @@
+import { Link } from 'react-router-dom'
 import { CalendarCheck, ArrowRight } from 'lucide-react'
 import Reveal from './Reveal'
 import SectionTransition from './SectionTransition'
 import SectionHeading from './SectionHeading'
-import { BOOKING_URL } from '../lib/data'
 import { SECTION_PADDING_Y } from '../foundation/tokens/spacing'
 
 export default function Booking() {
@@ -23,11 +23,10 @@ export default function Booking() {
  </h2>
  </Reveal>
   <Reveal delay={0.2}>
-  <p className="mt-6 max-w-md text-body">
-  Rezervace probíhá jednoduše prostřednictvím systému MyFox.
-  Vyber si termín, který ti vyhovuje, a objednej se během
-  několika okamžiků.
-  </p>
+   <p className="mt-6 max-w-md text-body">
+   Vyplň rezervační formulář a my se ti ozveme s potvrzením
+   termínu do 24 hodin.
+   </p>
   </Reveal>
  </div>
 
@@ -38,25 +37,23 @@ export default function Booking() {
  <CalendarCheck className="h-6 w-6 text-gold-400" />
  </div>
 
- <h3 className="mt-6 font-display text-2xl font-600 uppercase leading-tight tracking-wide text-white">
- Rezervace přes<br />
-  <span className="text-gold-400">MyFox</span>
- </h3>
+  <h3 className="mt-6 font-display text-2xl font-600 uppercase leading-tight tracking-wide text-white">
+  Rezervace<br />
+   <span className="text-gold-400">online</span>
+  </h3>
 
- <p className="mt-4 flex-1 text-body">
- Vyber si službu, termín i svého barbera během několika vteřin.
- Celý rezervační proces probíhá bezpečně v systému MyFox.
- </p>
+  <p className="mt-4 flex-1 text-body">
+  Vyplň rezervační formulář na stránce kontaktu. Zvol si službu
+  a preferovaný termín – ozveme se ti do 24 hodin.
+  </p>
 
- <a
- href={BOOKING_URL}
- target="_blank"
- rel="noopener noreferrer"
-  className="flex w-full items-center justify-center gap-3 border border-gold-500/50 bg-gold-500 px-8 py-5 text-cta"
- >
- Otevřít rezervační systém
-  <ArrowRight className="h-4 w-4" />
-  </a>
+  <Link
+  to="/kontakt"
+   className="flex w-full items-center justify-center gap-3 border border-gold-500/50 bg-gold-500 px-8 py-5 text-cta"
+  >
+  Rezervovat termín
+   <ArrowRight className="h-4 w-4" />
+   </Link>
  </div>
  </Reveal>
  </div>
