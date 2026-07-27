@@ -5,6 +5,7 @@ import Header from './components/Header'
 import ScrollToTop from './components/ScrollToTop'
 import Footer from './components/Footer'
 import CustomCursor from './components/motion/CustomCursor'
+import useParentCommunication from './hooks/useParentCommunication'
 import HomePage from './pages/HomePage'
 import OffersPage from './pages/OffersPage'
 import AboutPage from './pages/AboutPage'
@@ -12,6 +13,7 @@ import ContactPage from './pages/ContactPage'
 import GalleryPage from './pages/GalleryPage'
 
 function AppShell() {
+  useParentCommunication()
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
