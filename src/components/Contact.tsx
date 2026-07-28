@@ -21,7 +21,7 @@ export default function Contact({ compact }: { compact?: boolean }) {
   </Reveal>
  <Reveal delay={0.1}>
  <h2 className="text-display">
- Najdi nás <span className="text-display-accent">v {siteConfig.business.city}ě</span>
+ Najdi nás <span className="text-display-accent">v {siteConfig.business.cityLocative}</span>
  </h2>
  </Reveal>
  </div>

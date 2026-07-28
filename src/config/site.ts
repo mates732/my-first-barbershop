@@ -6,6 +6,7 @@ export interface SiteConfig {
     tagline: string
     description: string
     city: string
+    cityLocative: string
     cityShort: string
     address: string
     postalCode: string
@@ -51,6 +52,7 @@ export const siteConfig: SiteConfig = {
     description:
       'Zlatý Hřeben je místo, kde se potkává poctivé řemeslo s moderním přístupem.',
     city: 'Brno',
+    cityLocative: 'Brně',
     cityShort: 'CZ',
     address: 'Masarykova 42',
     postalCode:  '602 00 Brno',
